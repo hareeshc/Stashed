@@ -1,4 +1,6 @@
 Stashed::Application.routes.draw do
+  resources :statuses
+
   resources :services
 
   get "home/index"
