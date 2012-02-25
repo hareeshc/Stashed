@@ -1,25 +1,18 @@
-.row-fluid
-  .container
-    .span12
-      %h1 Stashboard
-      %br
-    .span12.maincontainer
-      %h2 Account Portal
-      %table.maincontainer
-        %tr
-          %th Time
-          %th Description
-          %th
-          %th
-          %th
+%h2 Status List
+%table.maincontainer
+  %tr
+    %th Time
+    %th Description
+    %th
+    %th
+    %th
 
-        - @statuses.each do |status|
-          %tr
-            %td= status.name
-            %td= status.description
-            %td= link_to 'Show', status
-            %td= link_to 'Edit', edit_status_path(status)
-            %td= link_to 'Delete', status, :confirm => 'Are you sure?', :method => :delete
-
-      %br
-      = link_to 'New Status', new_status_path
+  - @statuses.each do |status|
+    %tr
+      %td= status.name
+      %td= status.description
+      %td= link_to 'Show', status
+      %td= link_to 'Edit', edit_status_path(status)
+      %td= link_to 'Delete', status, :confirm => 'Are you sure?', :method => :delete
+%br
+  = link_to 'New Status', new_status_path

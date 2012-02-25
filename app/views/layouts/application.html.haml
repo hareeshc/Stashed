@@ -1,0 +1,24 @@
+!!!
+%html
+  %head
+    %title Stashed
+    = stylesheet_link_tag    "application"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body
+    .row-fluid
+      .container
+        %br
+        .container
+          .span12
+            %h1 Stashboard
+            %br
+          .span12.maincontainer
+            = yield
+      .row-fluid
+        .container
+          .span12
+            = link_to 'Services', services_url
+            = link_to 'Status', statuses_url
+            = link_to 'Event', events_url
+
