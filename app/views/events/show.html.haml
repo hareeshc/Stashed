@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Status:
+  = @event.Status
+%p
+  %b Service:
+  = @event.Service
+%p
+  %b Timestamp:
+  = @event.timestamp
+%p
+  %b Message:
+  = @event.message
+
+= link_to 'Edit', edit_event_path(@event)
+\|
+= link_to 'Back', events_path

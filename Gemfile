@@ -23,6 +23,7 @@ group :development,:test do
   gem 'rspec-rails'
   gem 'shoulda'
 	#shoulda - simplifies tests
+  gem 'database_cleaner'
 end
 
 
