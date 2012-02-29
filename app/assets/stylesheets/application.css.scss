@@ -9,15 +9,10 @@
 @import "bootstrap";
 
 
-.maincontainer{
-    background-color: #FFFFFF ;
-
+body{
+  font:12px arial,helvetica,verdana,sans-serif;
+  background: rgb(247, 247, 247);
 }
-table  {
-    border-collapse: collapse;
-    border: 2px solid black;
-}
-
 tr {
     border: 1px solid black;
 }
@@ -35,6 +30,9 @@ h3.date-range {color: #999; margin-top: 20px}
   border-collapse: separate;
   border-left:1px solid #E4E4E4;
   border-top:1px solid #E4E4E4;
+
+  background-color: #FFFFFF ;
+
 }
 
 .data a {
@@ -76,3 +74,4 @@ h3.date-range {color: #999; margin-top: 20px}
 .data .status img {
   max-width: 20px;
 }
+
