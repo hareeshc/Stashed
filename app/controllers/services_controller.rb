@@ -3,6 +3,7 @@ class ServicesController < ApplicationController
   # GET /services.json
   def index
     @services = Service.all
+    @statuses = Status.all
 
     respond_to do |format|
       format.html # index.html.erb

@@ -8,17 +8,19 @@
   %body
     .row-fluid
       .container
-        %br
-        .container
-          .span12
-            %h1 Stashboard
-            %br
+        .span12
+          #wrapper
+            .header
+              .actions.button-container
+                %a.button.pill.big{:href => "mailto:help@stashboard.org"} Report an Issue
+                %img#logo{:alt => "Logo", :src => "assets/stashboard-logo.png"}/
+                %h1 Stashboard
           .span12.data
             = yield
-      .row-fluid
-        .container
-          .span12
-            = link_to 'Services', services_url
-            = link_to 'Status', statuses_url
-            = link_to 'Event', events_url
+    .row-fluid
+      .container
+        .span12
+          = link_to 'Services', services_url
+          = link_to 'Status', statuses_url
+          = link_to 'Event', events_url
 

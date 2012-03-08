@@ -1,15 +1,12 @@
-%h1 Services
-
+-#%h1 Services
+.container
 %table.data
   %tr
-    %th Name
+    %th Service
     %th Description
     -(0..5).each do |num|
       %th= Date.today-num
     %th
-
-
-
   - @services.each do |service|
     %tr
       %td= link_to service.name, service
@@ -20,10 +17,32 @@
       -#%td= link_to 'Edit', edit_service_path(service)
       %td= link_to 'Delete', service, :confirm => 'Are you sure?', :method => :delete
 
-
 = link_to 'New Service', new_service_path
 %br
 %br
-Status Legend
+%table.data
+  %tr
+    %th Status Legend
+    - @statuses.each do |status|
+      %tr
+        %td= status.name
+        %td= status.description
+
+/- @service.status.each do |status|
+/  status.name
+/  %p= status.name, status.description
+
 /Read list from status model
 
+-#%ul
+-# - @widgets.each do |widget|
+-#   %li
+-#     = widget.name
+-#     %ul
+-#       - widget.gadgets.each do |gadget|
+-#         %li
+-#           %span #{gadget.name}: #{gadget.info}
+-#           - gadget.controls.each do |control|
+-#             %ul
+-#               %li
+-#                 %span #{control.name}:
