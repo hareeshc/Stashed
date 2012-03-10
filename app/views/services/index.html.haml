@@ -5,7 +5,10 @@
     %th Service
     %th Description
     -(0..5).each do |num|
-      %th= Date.today-num
+      -date = Date.today-num
+      %th= date.strftime('%b %d')
+      /      %th= Date.today.('%m-%d')
+
     %th
   - @services.each do |service|
     %tr
@@ -22,7 +25,7 @@
 %br
 %table.data
   %tr
-    %th Status Legend
+    %th{:colspan => "2"} Status Legend
     - @statuses.each do |status|
       %tr
         %td= status.name
