@@ -27,4 +27,7 @@
   = f.input :description, :wrapper => :prepend, :label => false do
     = content_tag :span, "Message", :class => "add-on"
     = f.input_field :description
+  = f.input :events, :wrapper => :prepend, :label => false do
+    = content_tag :span, "Event", :class => "add-on"
+    = f.input_field :events
   = f.button :submit, :class => 'btn-primary'
