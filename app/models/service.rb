@@ -3,4 +3,5 @@ class Service < ActiveRecord::Base
   validates_uniqueness_of :name
 
   has_many :events
+  accepts_nested_attributes_for :events
 end

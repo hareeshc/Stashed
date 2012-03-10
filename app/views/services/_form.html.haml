@@ -1,29 +1,30 @@
-= form_for @service do |f|
+-#= form_for @service do |f|
+-#  -if @service.errors.any?
+-#    #error_explanation
+-#      %h2= "#{pluralize(@service.errors.count, "error")} prohibited this service from being saved:"
+-#      %ul
+-#        - @service.errors.full_messages.each do |msg|
+-#          %li= msg
+-#  .field
+-#    = f.label :name
+-#    = f.text_field :name
+-#  .field
+-#    = f.label :message
+-#    = f.text_field :description
+-#  .actions
+-#    = f.submit 'Save'
+
+= simple_form_for(@service, :html => { :class => 'form-horizontal' }) do |f|
   -if @service.errors.any?
     #error_explanation
       %h2= "#{pluralize(@service.errors.count, "error")} prohibited this service from being saved:"
       %ul
         - @service.errors.full_messages.each do |msg|
           %li= msg
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :message
-    = f.text_field :description
-  .actions
-    = f.submit 'Save'
--#= simple_form_for @service do |f|
--#  f.input :name, :input_html => { :class => "span6" }, :hint => "add your article title here"
--#= simple_form_for @user do |f|
--# = f.input :username
--# = f.input :password
--# = f.button :submit
-%form.form-horizontal
-  %fieldset
-    %legend Legend text
-    .control-group
-      %label.control-label{:for => "input01"} Text input
-      .controls
-        %input#input01.input-xlarge{:type => "text"}
-          %p.help-block Supporting help text
+  = f.input :name, :wrapper => :prepend, :label => false do
+    = content_tag :span, "Name", :class => "add-on"
+    = f.input_field :name
+  = f.input :description, :wrapper => :prepend, :label => false do
+    = content_tag :span, "Message", :class => "add-on"
+    = f.input_field :description
+  = f.button :submit, :class => 'btn-primary'
