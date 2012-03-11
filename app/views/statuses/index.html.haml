@@ -9,10 +9,20 @@
 
   -   @statuses.each do |status|
     %tr
-      %%td= link_to status.name, status
+      %td= link_to status.name, status
       %td= status.description
       -#%td= link_to 'Show', status
-      %td= link_to 'Edit', edit_status_path(status)
-      %td= link_to 'Delete', status, :confirm => 'Are you sure?', :method => :delete
+      %td
+        = link_to 'Edit', edit_status_path(status)
+        = link_to image_tag("edit.png",:width=>30)
+      %td
+        = link_to 'Delete', status, :confirm => 'Are you sure?', :method => :delete
+        = link_to image_tag("delete.png",:width=>30)
+        -#  %img{:alt => "Logo", :src => "assets/delete.png", :width =>40}
+
+
 %br
-  = link_to 'New Status', new_status_path
+= link_to 'New Status', new_status_path
+
+-#= link_to image_tag (product.image_url, :border =>0) ,:action  =>  :add_to_cart,  :id  =>  product
+-#= button_to "Add  to  Cart",  :action  =>  :add_to_cart,  :id  =>  product

@@ -27,7 +27,21 @@
   = f.input :description, :wrapper => :prepend, :label => false do
     = content_tag :span, "Message", :class => "add-on"
     = f.input_field :description
-  = f.input :events, :wrapper => :prepend, :label => false do
-    = content_tag :span, "Event", :class => "add-on"
-    = f.input_field :events
+  -#= f.fields_for :events do |m|
+  =f.simple_fields_for :event do |m|
+    = m.input :messages, :wrapper => :prepend, :label => false do
+      = content_tag :span, "Event", :class => "add-on"
+      = m.input_field :messages
   = f.button :submit, :class => 'btn-primary'
+
+
+-#- form_for(@event, :url => event_path(@event)) do |f|
+-#  = f.text_field :event_title
+-#  - f.fields_for :company_events do |builder|
+-#    = builder.text_field :company_role
+-#    - builder.fields_for(:company) do |company_form|
+-#      = company_form.text_field :name
+-#
+-#= simple_form_for @machine do |m|
+-#  = m.simple_fields_for :parts do |p|
+-#  = p.input :name

@@ -24,6 +24,7 @@ group :development,:test do
   gem 'capybara'
   gem 'rspec-rails'
   gem 'shoulda'
+  gem "shoulda-matchers"
 	#shoulda - simplifies tests
   gem 'database_cleaner'
 end

@@ -18,7 +18,10 @@
         %td= "status"
       -#%td= link_to 'Show', service
       -#%td= link_to 'Edit', edit_service_path(service)
-      %td= link_to 'Delete', service, :confirm => 'Are you sure?', :method => :delete
+      %td
+        = link_to 'Delete', service, :confirm => 'Are you sure?', :method => :delete
+        = link_to image_tag("delete.png",:width=>40 )
+
 
 = link_to 'New Service', new_service_path
 %br

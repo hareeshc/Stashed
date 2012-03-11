@@ -4,6 +4,7 @@ class ServicesController < ApplicationController
   def index
     @services = Service.all
     @statuses = Status.all
+    @events = Event.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -26,7 +27,7 @@ class ServicesController < ApplicationController
   # GET /services/new.json
   def new
     @service = Service.new
-
+    @event = Event.new
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @service }
@@ -42,6 +43,7 @@ class ServicesController < ApplicationController
   # POST /services.json
   def create
     @service = Service.new(params[:service])
+    #@event = Event.new(params[:event])
 
     respond_to do |format|
       if @service.save
@@ -52,6 +54,11 @@ class ServicesController < ApplicationController
         format.json { render json: @service.errors, status: :unprocessable_entity }
       end
     end
+
+    #respond_to do |format|
+    #  format.html # new.html.erb
+    #  format.json { render json: @event }
+    #end
   end
 
   # PUT /services/1
