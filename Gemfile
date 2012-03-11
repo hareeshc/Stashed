@@ -9,7 +9,7 @@ gem 'pg'
 gem 'bootstrap-sass'
 gem 'simple_form'
 gem 'carrierwave'
-
+gem 'bcrypt-ruby', :require => 'bcrypt'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

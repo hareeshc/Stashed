@@ -1,11 +1,19 @@
 Stashed::Application.routes.draw do
-  resources :events
+ #get "users/new"
+ get "log_in" => "sessions#new", :as => "log_in"
+ get "sign_up" => "users#new", :as => "sign_up"
+ root :to => "users#new"
+ resources :users
+ resources :sessions
 
-  resources :statuses
+ resources :events
+
+ resources :statuses
 
   resources :services
 
   get "home/index"
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

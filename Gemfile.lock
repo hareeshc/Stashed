@@ -30,6 +30,7 @@ GEM
     activesupport (3.1.3)
       multi_json (~> 1.0)
     arel (2.2.1)
+    bcrypt-ruby (3.0.1)
     bootstrap-sass (2.0.0)
     builder (3.0.0)
     capybara (1.1.2)
@@ -130,6 +131,7 @@ GEM
       multi_json (~> 1.0.4)
       rubyzip
     shoulda (2.11.3)
+    shoulda-matchers (1.0.0)
     simple_form (1.5.2)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
@@ -153,6 +155,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt-ruby
   bootstrap-sass
   capybara
   carrierwave
@@ -165,5 +168,6 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 3.1.5)
   shoulda
+  shoulda-matchers
   simple_form
   uglifier (>= 1.0.3)
