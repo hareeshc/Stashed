@@ -3,7 +3,7 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = Event.all
-
+    #@events = @service.events
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @events }
@@ -14,7 +14,7 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @event = Event.find(params[:id])
-
+    #@event = @service.events.find(params[:id])
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @event }
@@ -41,6 +41,7 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(params[:event])
+    #@event = @service.events.build(params[:event])
 
     respond_to do |format|
       if @event.save
@@ -57,6 +58,7 @@ class EventsController < ApplicationController
   # PUT /events/1.json
   def update
     @event = Event.find(params[:id])
+    #@event = @service.events.find(params[:id])
 
     respond_to do |format|
       if @event.update_attributes(params[:event])
@@ -73,6 +75,7 @@ class EventsController < ApplicationController
   # DELETE /events/1.json
   def destroy
     @event = Event.find(params[:id])
+   # @event = @service.events.find(params[:id])
     @event.destroy
 
     respond_to do |format|

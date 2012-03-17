@@ -1,0 +1,29 @@
+= simple_form_for(@user, :html => { :class => 'form-horizontal' }) do |f|
+  - if @user.errors.any?
+    .error_messages
+      %h2 Form is invalid
+      %ul
+        - for message in @user.errors.full_messages
+          %li= message
+  %p
+    = f.input :email, :wrapper => :prepend, :label => false do
+      = content_tag :span, "Email", :class => "add-on"
+      = f.input_field :email
+  %p
+    = f.input :password, :wrapper => :prepend, :label => false do
+      = content_tag :span, "Password", :class => "add-on"
+      = f.password_field :password
+  %p
+    = f.input :password_confirmation, :wrapper => :prepend, :label => false do
+      = content_tag :span, "Password_confirmation", :class => "add-on"
+      = f.password_field :password_confirmation
+  = f.button :submit, :class => 'btn-primary'
+
+  -#%p
+  -#  = f.label :password
+  -#  %br/
+  -#  = f.password_field :password
+  -#%p
+  -#  = f.label :password_confirmation
+  -#  = f.password_field :password_confirmation
+  -#%p.button= f.submit

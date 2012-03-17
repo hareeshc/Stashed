@@ -1,16 +1,16 @@
 Stashed::Application.routes.draw do
+ #get "sessions/new"
  #get "users/new"
  get "log_in" => "sessions#new", :as => "log_in"
- get "sign_up" => "users#new", :as => "sign_up"
- root :to => "users#new"
+ get "log_out" => "sessions#destroy", :as => "log_out"
+
+
+ root :to => "services#index"
  resources :users
  resources :sessions
-
  resources :events
-
  resources :statuses
-
-  resources :services
+ resources :services
 
   get "home/index"
 
@@ -65,7 +65,7 @@ Stashed::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   # root :to => 'home#index'
-  root :to => 'services#index'
+  #root :to => 'services#index'
 
   # See how all your routes lay out with "rake routes"
 

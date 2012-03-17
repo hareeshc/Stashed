@@ -1,25 +1,20 @@
-%h1 Events
-
-%table.data
-  %tr
-    %th Status
-    %th Service
-    %th Timestamp
-    %th Message
-    %th
-    %th
-    %th
-
-  - @events.each do |event|
+%div.page-header
+  %h1 Events
+.container
+  %table.table.table-bordered.table-striped.table-condensed
+    %thead
     %tr
-      %td= event.Status
-      %td= event.Service
-      %td= event.timestamp
-      %td= event.message
-      %td= link_to 'Show', event
-      %td= link_to 'Edit', edit_event_path(event)
-      %td= link_to 'Destroy', event, :confirm => 'Are you sure?', :method => :delete
-
-%br
+      %th Event
+      %th Time Created
+      %th Time Updated
+      %th Service
+      %th Status
+    - @events.each do |event|
+      %tr
+        %td= link_to event.message,event
+        %td= event.created_at
+        %td= event.updated_at
+        %td= event.service_id
+        %td= event.status_id
 
 -#= link_to 'New Event', new_event_path

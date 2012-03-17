@@ -1,54 +1,71 @@
--#%h1 Services
+%div.page-header
+  %h1 Services
+  -#-#=Event.joins(:service,:status).each do|st|
+  -#-#  %p= st.images
+  -Event.joins('INNER JOIN services ON events.service_id = services.id').each do |e|
+    %p= e.message
+    %p= e.status_id
+  -Event.joins('INNER JOIN services ON events.service_id = services.id JOIN statuses ON events.status_id = statuses.id' ).each do |st|
+    -#%p= st.images
+    %p= st.updated_at
+  -#-Event.joins(:service).each do |t|
+  -#  -#%p= t.service_id
+  -#  -#%p= t.status_id
+  -#-Status.joins('INNER JOIN events ON events.status_id = statuses.id').each do |v|
+  -#  %p= v.images
+
 .container
-%table.data
-  %tr
-    %th Service
-    %th Description
-    -(0..5).each do |num|
-      -date = Date.today-num
-      %th= date.strftime('%b %d')
-      /      %th= Date.today.('%m-%d')
-
-    %th
-  - @services.each do |service|
-    %tr
-      %td= link_to service.name, service
-      %td= service.description
-      -(0..5).each do |num|
-        %td= "status"
-      -#%td= link_to 'Show', service
-      -#%td= link_to 'Edit', edit_service_path(service)
-      %td
-        = link_to 'Delete', service, :confirm => 'Are you sure?', :method => :delete
-        = link_to image_tag("delete.png",:width=>40 )
-
-
-= link_to 'New Service', new_service_path
-%br
-%br
-%table.data
-  %tr
-    %th{:colspan => "2"} Status Legend
-    - @statuses.each do |status|
+  %table.table.table-bordered.table-striped.table-condensed
+    %thead
       %tr
-        %td= status.name
-        %td= status.description
+        %th Service
+        %th Id
+        %th Current
+        -(1..6).each do |num|
+          -date = Date.today-num
+          %th= date.strftime('%b %d')
+          -#%th= Date.today.('%m-%d')
+        -if current_user
+          %th
+    %tbody
+      - @services.each do |service|
+        %tr
+          %td= link_to service.name, service
+          %td= service.id
+          -#= Event.where(service_id=service.id AND update)
+            -#%td= link_to service.name, edit_service_path(service), {:class => 'name'}
+          -(0..6).each do |num|
+            -#%td= link_to image_tag("icon_512.png",:width=>40 )
+            -date = Date.today-num
+            %td= date
+          -if current_user
+            %td
+              %button.btn.btn-danger.btn-small
+                %i.icon-remove-sign
+                = link_to 'Delete', service, :confirm => 'Are you sure?', :method => :delete
+  %p
+    %button.btn.btn-success
+      = link_to 'New Service', new_service_path
+  .container.span4
+    %table.table.table-bordered.table-striped.table-condensed
+      %thead
+        %tr
+          %th{:colspan => "2"} Status Legend
+        - @statuses.each do |status|
+          %tr
+            %td
+              %i{:class=>status.images}
+            %td= status.description
 
-/- @service.status.each do |status|
-/  status.name
-/  %p= status.name, status.description
-
-/Read list from status model
-
--#%ul
--# - @widgets.each do |widget|
--#   %li
--#     = widget.name
--#     %ul
--#       - widget.gadgets.each do |gadget|
--#         %li
--#           %span #{gadget.name}: #{gadget.info}
--#           - gadget.controls.each do |control|
--#             %ul
--#               %li
--#                 %span #{control.name}:
+-#%tbody
+-#  - unless @statuses.nil?
+-#  - @statuses.keys.each do |name|
+-#  %tr{:id => name.gsub(/\s+/, "")}
+-#    %td.left= link_to name, CGI::escape(name)
+-#    %td.highlight
+-#      = link_to image_tag(@statuses[name][0].image, {:class => "image0", :alt => ''}), CGI::escape(name)
+-#    - 5.times do |i|
+-#      %td
+-#        = image_tag(@statuses[name][i+1].image, {:class => "sym", :alt => ''})
+-#  - end
+-#  - end

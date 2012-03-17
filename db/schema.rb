@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(:version => 20120311033038) do
   create_table "statuses", :force => true do |t|
     t.string   "name"
     t.string   "description"
+    t.string   "images"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

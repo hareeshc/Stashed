@@ -1,28 +1,28 @@
-%h2 Status List
-%table.data
-  %thead
-    %tr
-      %th Status
-      %th Description
-      %th
-      %th
-
-  -   @statuses.each do |status|
-    %tr
-      %td= link_to status.name, status
-      %td= status.description
-      -#%td= link_to 'Show', status
-      %td
-        = link_to 'Edit', edit_status_path(status)
-        = link_to image_tag("edit.png",:width=>30)
-      %td
-        = link_to 'Delete', status, :confirm => 'Are you sure?', :method => :delete
-        = link_to image_tag("delete.png",:width=>30)
-        -#  %img{:alt => "Logo", :src => "assets/delete.png", :width =>40}
-
-
-%br
-= link_to 'New Status', new_status_path
-
--#= link_to image_tag (product.image_url, :border =>0) ,:action  =>  :add_to_cart,  :id  =>  product
--#= button_to "Add  to  Cart",  :action  =>  :add_to_cart,  :id  =>  product
+%div.page-header
+  %h1 Status
+.container
+  %table.table.table-bordered.table-striped.table-condensed
+    %thead
+      %tr
+        %th Status
+        %th Description
+        %th Icon
+        %th
+    %tbody
+      -@statuses.each do |status|
+        %tr
+          %td= link_to status.name, status
+          %td= status.description
+          %td
+            %i{:class=>status.images}
+          %td
+            %button.btn.btn-warning.btn-small
+              %i.icon-edit
+              = link_to 'Edit', edit_status_path(status)
+          %td
+            %button.btn.btn-danger.btn-small
+              %i.icon-remove-sign
+              = link_to 'Delete', status, :confirm => 'Are you sure?', :method => :delete
+  %p
+    %button.btn.btn-success
+      = link_to 'New Status', new_status_path

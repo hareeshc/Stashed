@@ -4,7 +4,7 @@ class ServicesController < ApplicationController
   def index
     @services = Service.all
     @statuses = Status.all
-    @events = Event.all
+    #@events = Event.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,6 +16,8 @@ class ServicesController < ApplicationController
   # GET /services/1.json
   def show
     @service = Service.find(params[:id])
+    #@service = Service.find_by_name(CGI::unescape(parsams[:service_name]))
+    #@events = @service.get_all_statuses
 
     respond_to do |format|
       format.html # show.html.erb
@@ -27,22 +29,29 @@ class ServicesController < ApplicationController
   # GET /services/new.json
   def new
     @service = Service.new
-    @event = Event.new
+    @service.events.build
+    @statuses = Status.all
+
+    #@event = Event.new
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @service }
     end
+
+
   end
 
   # GET /services/1/edit
   def edit
     @service = Service.find(params[:id])
+    #@service.events.build
   end
 
   # POST /services
   # POST /services.json
   def create
     @service = Service.new(params[:service])
+
     #@event = Event.new(params[:event])
 
     respond_to do |format|
@@ -65,6 +74,7 @@ class ServicesController < ApplicationController
   # PUT /services/1.json
   def update
     @service = Service.find(params[:id])
+    #@event = Event.find(params[:id])
 
     respond_to do |format|
       if @service.update_attributes(params[:service])
@@ -89,58 +99,3 @@ class ServicesController < ApplicationController
     end
   end
 end
-class ThingsController < ApplicationController
-  before_filter :get_thing, :only => [ :edit, :show, :update, :destroy ]
-
-  def get_thing
-    begin
-      @thing = Thing.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      render file: "public/404.html", status: 404
-    end
-  end
-
-  # GET /things
-  def index
-    @things = Thing.all
-  end
-
-  # GET /things/1
-  def show
-  end
-
-  # GET /things/new
-  def new
-    @thing = Thing.new
-  end
-
-  # GET /things/1/edit
-  def edit
-  end
-
-  # POST /things
-  def create
-    @thing = Thing.new(params[:thing])
-    if @thing.save
-      redirect_to @thing, notice: 'Thing was successfully created.'
-    else
-      render action: "new"
-    end
-  end
-
-  # PUT /things/1
-  def update
-    if @thing.update_attributes(params[:thing])
-      redirect_to @thing, notice: 'Thing was successfully updated.'
-    else
-      render action: "edit"
-    end
-  end
-
-  # DELETE /things/1
-  def destroy
-    @thing.destroy
-    redirect_to things_url
-  end
-end
-

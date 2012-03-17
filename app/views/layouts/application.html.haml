@@ -6,21 +6,38 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
-    .row-fluid
+  %header.navbar.navbar-fixed
+    .navbar-inner
       .container
-        .span12
-          #wrapper
-            .header
-              .actions.button-container
-                %a.button.pill.big{:href => "mailto:hareeshc@gmail.com"} Admin
-                %img#logo{:alt => "Logo", :src => "assets/stashboard-logo.png"}/
-                %h1 Stashboard
-          .span12.data
-            = yield
+        %a.brand{:href => "/"} Stashboard
+        %ul.nav
+          %li
+            %a{:href => "/"} Home
+          -if current_user
+            %li
+              %a{:href => "/"} Admin
+            %li
+              %a{:href => "/services"} Services
+            %li
+              %a{:href => "/statuses"} Status
+            %li
+              %a{:href => "/events"} Events
+            %li
+              %a{:href => log_out_path} Logout
+            %li
+              %a{} #{current_user.email} is currently logged in
+          -else
+            %li
+              %a{:href => log_in_path} Admin
+            %li
+              %a{:href => new_user_path } Sign up
+            %li
+              %a{:href => log_in_path} Login
+  .container.master-container
     .row-fluid
-      .container
-        .span12
-          = link_to 'Services', services_url
-          = link_to 'Status', statuses_url
-          = link_to 'Event', events_url
+      = yield
+
+  %footer.container
+    Copyright 2012
+    %a{:href => "http://www.hareesh.net "} Hareesh Chandrupatla
 
