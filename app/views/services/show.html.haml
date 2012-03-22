@@ -1,12 +1,23 @@
-%p#notice= notice
+%div.page-header
+  %h1 #{@service.name} #{@service.id}
+  %h2 #{@service.description}
+.container
+  %table.table.table-bordered.table-striped.table-condensed
+    %thead
+    %tr
+      %th Message
+      %th Status
+      %th Date
+      -@event.each do |e|
+        %tr
+          %td= e.message
+          %td
+            -@statuses.each do |s|
+              -if(s.id == e.status_id)
+                %i{:class=>s.images}
+          %td= e.created_at
+  -if current_user
+    %p
+      %button.btn.btn-success
+        = link_to 'Edit Service', edit_service_path(@service)
 
-%p
-  %b Name:
-  = @service.name
-%p
-  %b Description:
-  = @service.description
-
-= link_to 'Edit', edit_service_path(@service)
-\|
-= link_to 'Back', services_path

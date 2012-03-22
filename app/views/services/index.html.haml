@@ -1,28 +1,16 @@
 %div.page-header
   %h1 Services
-  -#-#=Event.joins(:service,:status).each do|st|
-  -#-#  %p= st.images
-  -Event.joins('INNER JOIN services ON events.service_id = services.id').each do |e|
-    %p= e.message
-    %p= e.status_id
-  -Event.joins('INNER JOIN services ON events.service_id = services.id JOIN statuses ON events.status_id = statuses.id' ).each do |st|
-    -#%p= st.images
-    %p= st.updated_at
-  -#-Event.joins(:service).each do |t|
-  -#  -#%p= t.service_id
-  -#  -#%p= t.status_id
-  -#-Status.joins('INNER JOIN events ON events.status_id = statuses.id').each do |v|
-  -#  %p= v.images
-
 .container
   %table.table.table-bordered.table-striped.table-condensed
     %thead
       %tr
         %th Service
-        %th Id
+        -#%th Id
         %th Current
         -(1..6).each do |num|
-          -date = Date.today-num
+          -#-date = Date.today-num
+          -d = Time.now - (num * 86400)
+          -date = d.utc
           %th= date.strftime('%b %d')
           -#%th= Date.today.('%m-%d')
         -if current_user
@@ -31,21 +19,38 @@
       - @services.each do |service|
         %tr
           %td= link_to service.name, service
-          %td= service.id
-          -#= Event.where(service_id=service.id AND update)
-            -#%td= link_to service.name, edit_service_path(service), {:class => 'name'}
+          -#%td= service.id
           -(0..6).each do |num|
-            -#%td= link_to image_tag("icon_512.png",:width=>40 )
-            -date = Date.today-num
-            %td= date
+            %td
+              -#%br= date = Date.today-num
+              -#%br= date.utc
+              - t = Time.now - (num * 86400)
+              - time = t.utc
+              - dateutc = time.strftime("%Y-%m-%d")
+              -#%br= date = dateutc-num
+              -maxevnt = {}
+              -@evntdate = Event.joins('INNER JOIN services ON events.service_id = services.id INNER JOIN statuses ON events.status_id = statuses.id').where("events.service_id= ? AND events.created_at > ? ",service.id, time.to_date )
+              -@evntdate.each do |e|
+                -if(time.to_date ==  e.created_at.to_date)
+                  -maxevnt[e.id] = e.created_at
+              -max = maxevnt.max_by{|k,v| v}
+              -unless max.nil?
+                -eventid = max[0]
+                -img = []
+                -@evntdate.each do |e|
+                  -@status.each do |st|
+                    -if(e.id == eventid && st.id == e.status_id)
+                      - img.push(st.images)
+                %i{:class=>img.uniq[0]}
           -if current_user
             %td
               %button.btn.btn-danger.btn-small
                 %i.icon-remove-sign
                 = link_to 'Delete', service, :confirm => 'Are you sure?', :method => :delete
-  %p
-    %button.btn.btn-success
-      = link_to 'New Service', new_service_path
+  -if current_user
+    %p
+      %button.btn.btn-success
+        = link_to 'New Service', new_service_path
   .container.span4
     %table.table.table-bordered.table-striped.table-condensed
       %thead
@@ -57,15 +62,4 @@
               %i{:class=>status.images}
             %td= status.description
 
--#%tbody
--#  - unless @statuses.nil?
--#  - @statuses.keys.each do |name|
--#  %tr{:id => name.gsub(/\s+/, "")}
--#    %td.left= link_to name, CGI::escape(name)
--#    %td.highlight
--#      = link_to image_tag(@statuses[name][0].image, {:class => "image0", :alt => ''}), CGI::escape(name)
--#    - 5.times do |i|
--#      %td
--#        = image_tag(@statuses[name][i+1].image, {:class => "sym", :alt => ''})
--#  - end
--#  - end
+-

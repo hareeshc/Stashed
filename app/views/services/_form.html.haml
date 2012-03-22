@@ -11,12 +11,15 @@
   = f.input :description, :wrapper => :prepend, :label => false do
     = content_tag :span, "Message", :class => "add-on"
     = f.input_field :description
-    = f.simple_fields_for :events do |m|
+  - $cnt = 0
+  = f.simple_fields_for :events do |m|
+    = if ($cnt == @count  )
       = m.input :message, :wrapper => :prepend, :label => false do
         = content_tag :span, "Event", :class => "add-on"
         = m.input_field :message
-      =m.input :status_id, :collection =>  @statuses
+      = m.input :status_id, :collection =>  @statuses
+    -$cnt += 1
 
-
+  %br
   = f.button :submit, :class => 'btn-primary'
 
