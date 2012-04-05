@@ -29,7 +29,6 @@ group :development,:test do
   gem 'database_cleaner'
 end
 
-
 gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password

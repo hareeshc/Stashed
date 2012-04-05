@@ -11,18 +11,7 @@
   = f.input :description, :wrapper => :prepend, :label => false do
     = content_tag :span, "Description", :class => "add-on"
     = f.input_field :description
-  -#.span4
-  -#  .well
   -icons = ["icon-refresh", "icon-star","icon-star-empty","icon-th-large","icon-ok","icon-signal","icon-trash","icon-time","icon-repeat","icon-lock","icon-flag","icon-ok-circle","icon-remove-circle","icon-arrow-up","icon-arrow-down","icon-plus","icon-minus","icon-asterisk","icon-exclamation-sign","icon-warning-sign"]
   =f.input :images, :collection => icons
-  -#.control-group
-  -#  %label.control-label{:for => "select01"} Select list
-  -#  .controls
-  -#    %select#select01
-  -#      %option something
-  -#      %option 2
-  -#      %option 3
-  -#      %option 4
-  -#      %option 5
 
   = f.button :submit, :class => 'btn-primary'

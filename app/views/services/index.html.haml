@@ -5,7 +5,6 @@
     %thead
       %tr
         %th Service
-        -#%th Id
         %th Current
         -(1..6).each do |num|
           -#-date = Date.today-num
@@ -19,11 +18,9 @@
       - @services.each do |service|
         %tr
           %td= link_to service.name, service
-          -#%td= service.id
           -(0..6).each do |num|
             %td
-              -#%br= date = Date.today-num
-              -#%br= date.utc
+
               - t = Time.now - (num * 86400)
               - time = t.utc
               - dateutc = time.strftime("%Y-%m-%d")
@@ -42,6 +39,8 @@
                     -if(e.id == eventid && st.id == e.status_id)
                       - img.push(st.images)
                 %i{:class=>img.uniq[0]}
+              -else
+                %i{:class=>"icon-star-empty"}
           -if current_user
             %td
               %button.btn.btn-danger.btn-small

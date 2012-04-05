@@ -11,8 +11,8 @@
       .container
         %a.brand{:href => "/"} Stashboard
         %ul.nav
-          %li
-            %a{:href => "/"} Home
+          -#%li
+          -#  %a{:href => "/"} Home
           -if current_user
             %li
               %a{:href => "/"} Admin
@@ -31,8 +31,8 @@
               %a{:href => log_in_path} Admin
             %li
               %a{:href => new_user_path } Sign up
-            %li
-              %a{:href => log_in_path} Login
+            -#%li
+            -#  %a{:href => log_in_path} Login
   .container.master-container
     .row-fluid
       = yield

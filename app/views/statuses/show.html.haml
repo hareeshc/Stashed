@@ -1,12 +1,16 @@
-%p#notice= notice
+%div.page-header
+  %h1 Status
 
-%p
-  %b Name:
-  = @status.name
-%p
-  %b Description:
-  = @status.description
-
-= link_to 'Edit', edit_status_path(@status)
-\|
-= link_to 'Back', statuses_path
+.container
+  %table.table.table-bordered.table-striped.table-condensed
+    %tr
+      %td Name
+      %td Description
+      %td
+    %tr
+      %td #{@status.name}
+      %td #{@status.description}
+      %td
+        %i{:class=>@status.images}
+  %button.btn.btn-success
+    = link_to 'Edit Status', edit_status_path(@status)
